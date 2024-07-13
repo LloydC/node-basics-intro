@@ -6,15 +6,8 @@ const favicon = require("serve-favicon");
 const logger = require("morgan");
 const path = require("path");
 
-const bcrypt = require("bcrypt");
 const passport = require("passport");
 const User = require("./models/User.model");
-const LocalStrategy = require("passport-local").Strategy;
-
-const app_name = require("./package.json").name;
-const debug = require("debug")(
-  `${app_name}:${path.basename(__filename).split(".")[0]}`
-);
 
 const app = express();
 
@@ -45,31 +38,6 @@ passport.deserializeUser((id, callback) => {
     .catch((err) => callback(err));
 });
 
-// Passport LocalStrategy
-/* passport.use(
-  new LocalStrategy(
-    {
-      usernameField: "username", // by default
-      passwordField: "password", // by default
-    },
-    (username, password, done) => {
-      User.findOne({ username })
-        .then((user) => {
-          if (!user) {
-            return done(null, false, { message: "Incorrect username" });
-          }
-
-          if (!bcrypt.compareSync(password, user.password)) {
-            return done(null, false, { message: "Incorrect password" });
-          }
-
-          done(null, user);
-        })
-        .catch((err) => done(err));
-    }
-  )
-); */
-
 // Express View engine setup
 
 app.use(
@@ -86,7 +54,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(favicon(path.join(__dirname, "public", "images", "favicon.ico")));
 
 // default value for title local
-app.locals.title = "Express - Generated with IronGenerator";
+app.locals.title = "Express App";
 
 app.use("/", require("./routes/index"));
 app.use("/", require("./routes/auth.routes"));

@@ -8,12 +8,13 @@ const logger = require("morgan");
 const path = require("path");
 
 mongoose
-  .connect("mongodb://localhost/library-project" 
-  // {
-  //   useCreateIndex: true,
-  //   useNewUrlParser: true,
-  //   useUnifiedTopology: true,
-  // }
+  .connect(
+    "mongodb://localhost/library-project"
+    // {
+    //   useCreateIndex: true,
+    //   useNewUrlParser: true,
+    //   useUnifiedTopology: true,
+    // }
   )
   .then((x) => {
     console.log(
@@ -23,11 +24,6 @@ mongoose
   .catch((err) => {
     console.error("Error connecting to mongo", err);
   });
-
-const app_name = require("./package.json").name;
-const debug = require("debug")(
-  `${app_name}:${path.basename(__filename).split(".")[0]}`
-);
 
 const app = express();
 
@@ -53,7 +49,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(favicon(path.join(__dirname, "public", "images", "favicon.ico")));
 
 // default value for title local
-app.locals.title = "Express - Generated with IronGenerator";
+app.locals.title = "Express App";
 
 app.use("/", require("./routes/index"));
 
