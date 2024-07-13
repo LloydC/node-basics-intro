@@ -2,7 +2,7 @@ const getCountryInfo = (countryName) => {
   axios
     .get(`https://restcountries.eu/rest/v2/name/${countryName}`)
     .then((response) => {
-      console.log("Response from API is: ", response);
+      // console.log("Response from API is: ", response);
 
       const countryDetail = response.data[0];
       console.log("a single country details: ", countryDetail);
